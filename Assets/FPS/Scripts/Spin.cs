@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 旋转游戏对象
+/// </summary>
 public class Spin : MonoBehaviour
 {
-    public float speed = 0.5f;
+    [HideInInspector]
+    float speed = 0.5f;
 
     void Start()
     {

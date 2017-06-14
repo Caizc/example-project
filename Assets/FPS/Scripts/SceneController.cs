@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 场景控制器
+/// </summary>
 public class SceneController : MonoBehaviour
 {
     [SerializeField]

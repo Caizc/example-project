@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 响应键盘输入来移动
+/// </summary>
 [RequireComponent(typeof(CharacterController))]
 [AddComponentMenu("Control Script/FPS Input")]
 public class FPSInput : MonoBehaviour
 {
-    public const float baseSpeed = 6.0f;
-    public float speed = 6.0f;
+    [SerializeField]
+    const float baseSpeed = 6.0f;
+    [SerializeField]
+    float speed = 6.0f;
+
+    // 游戏对象所受的重力
+    [SerializeField]
+    float gravity = -9.8f;
 
     private CharacterController _charactorController;
-
-    public float gravity = -9.8f;
 
     void Awake()
     {
@@ -33,15 +40,21 @@ public class FPSInput : MonoBehaviour
 
         Vector3 movement = new Vector3(deltaX, 0, deltaZ);
         movement = Vector3.ClampMagnitude(movement, speed);
+        // 给予游戏对象一个竖直向下的重力
         movement.y = gravity;
 
+        // 将方向向量乘以 Time.deltaTime 以消除帧率依赖
         movement = movement * Time.deltaTime;
+        // 将方向向量从本地坐标系转换为全局坐标系
         movement = this.transform.TransformDirection(movement);
-        _charactorController.Move(movement);
 
-        // this.transform.Translate(deltaX * Time.deltaTime, 0, deltaZ * Time.deltaTime);
+        _charactorController.Move(movement);
     }
 
+    /// <summary>
+    /// 处理速度变化方法
+    /// </summary>
+    /// <param name="value">速度调节系数</param>
     private void OnSpeedChanged(float value)
     {
         speed = baseSpeed * value;
