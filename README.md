@@ -1,2 +1,3 @@
 # example-project
-A Unity project contains various useful code segments or small examples.
+
+A Unity project contains various small examples or useful code segments.
